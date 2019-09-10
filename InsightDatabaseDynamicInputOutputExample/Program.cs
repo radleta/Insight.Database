@@ -16,6 +16,7 @@ namespace InsightDatabaseDynamicInputOutputExample
 
         static void Main(string[] args)
         {            
+			// Note: You need to set your environment variable to a valid connection string and restart VS.NET before debugging for this to work.
             string ConnectionString = Environment.GetEnvironmentVariable("InsightDatabaseDynamicInputOutputExample.ConnectionString") ?? throw new ApplicationException("Please define the InsightDatabaseDynamicInputOutputExample.ConnectionString environment variable.");
 
             const string SchemaSqlScript = @"
@@ -90,6 +91,7 @@ namespace InsightDatabaseDynamicInputOutputExample
                 (cmd, r) =>
                 {
 					// get field information when needed
+					// Note: You could cache these fields depending on the frequency of the changes to the procedure.
 					for (var i = 0; i < r.FieldCount; i++)
 					{
 						var name = r.GetName(i);
@@ -111,6 +113,7 @@ namespace InsightDatabaseDynamicInputOutputExample
 			outProperties.Add("OutputValue", typeof(int));
 			
 			// build our dynamic type
+			// HACK: You would need to cache this type based on the contents of the outProperties since its expensive.
 			var outType = RuntimeTypeBuilder.CompileResultTypeInfo("MyAssembly", "MyModule", "MyType", outProperties).AsType();
 
 			// create an array of our output type

@@ -5,17 +5,19 @@ using System.Reflection;
 
 namespace InsightDatabaseDynamicInputOutputExample
 {
+	/// <summary>
+	/// This class provides the ability to build a System.Type at runtime.
+	/// </summary>
     public static class RuntimeTypeBuilder
     {
-        public static object CreateNewObject(string assemblyName, string moduleName, string typeName, Dictionary<string, Type> props)
-        {
-            var myTypeInfo = CompileResultTypeInfo(assemblyName, moduleName, typeName, props);
-            var myType = myTypeInfo.AsType();
-            var myObject = Activator.CreateInstance(myType);
-
-            return myObject;
-        }
-
+		/// <summary>
+		/// Create a <see cref="TypeInfo"/> at runtime of a class with public properties of <c>props</c>.
+		/// </summary>
+		/// <param name="assemblyName">The name of the assembly at store the type. It's dynamically created so the numbe needs to not conflict with existing assembly names.</param>
+		/// <param name="moduleName">The module within the <c>assemblyName</c> assembly.</param>
+		/// <param name="typeName">The name of the <see cref="System.Type"/> to be stored in the <c>moduleName</c> module.</param>
+		/// <param name="props">The properties to create on the outputted type. They will have a public get and set accessor.</param>
+		/// <returns></returns>
         public static TypeInfo CompileResultTypeInfo(string assemblyName, string moduleName, string typeName, Dictionary<string, Type> props)
         {
             TypeBuilder tb = GetTypeBuilder(assemblyName, moduleName, typeName);
