@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Insight.Database.Configuration\Insight.Database.Configuration.csproj" />
+		<ProjectReference Include="..\Insight.Database.Core\Insight.Database.Core.csproj" />
+		<ProjectReference Include="..\Insight.Database.Providers.Default\Insight.Database.Providers.Default.csproj" />
+		<ProjectReference Include="..\Insight.Database\Insight.Database.csproj" />
+	</ItemGroup>
+
+</Project>
