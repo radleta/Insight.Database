@@ -43,14 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\InsightDatabaseDynamicInputOutputExample\ExpandoConvert.cs">
-      <Link>ExpandoConvert.cs</Link>
-    </Compile>
     <Compile Include="..\InsightDatabaseDynamicInputOutputExample\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
-    <Compile Include="..\InsightDatabaseDynamicInputOutputExample\RuntimeTypeBuilder.cs">
-      <Link>RuntimeTypeBuilder.cs</Link>
+    <Compile Include="..\InsightDatabaseDynamicInputOutputExample\RuntimeDictionaryWrapper.cs">
+      <Link>RuntimeDictionaryWrapper.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

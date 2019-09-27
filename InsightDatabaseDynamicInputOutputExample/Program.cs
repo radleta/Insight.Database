@@ -113,19 +113,21 @@ namespace InsightDatabaseDynamicInputOutputExample
 			outProperties.Add("OutputValue", typeof(int));
 			
 			// build our dynamic type
-			// HACK: You would need to cache this type based on the contents of the outProperties since its expensive.
-			var outType = RuntimeTypeBuilder.CompileResultTypeInfo("MyAssembly", "MyModule", "MyType", outProperties).AsType();
+			var outWrapperType = RuntimeDictionaryWrapper.GetOrCreateWrapperType(outProperties);
+
+			// get the converter
+			var converter = RuntimeDictionaryWrapper.GetOrCreateConverter(outWrapperType);
 
 			// create an array of our output type
 			// the type of the array tells insight how to map it
-			var outRows = Array.CreateInstance(outType, rows.Count);
+			var outRows = Array.CreateInstance(outWrapperType, rows.Count);
 
 			// convert each row to our output type
 			// and store in the output array
 			for (var i = 0; i < rows.Count; i++)
 			{
 				var row = rows[i];
-				var outRow = ExpandoConvert.ChangeType(row, outType);
+				var outRow = converter(row);
 				outRows.SetValue(outRow, i);
 			}
 
